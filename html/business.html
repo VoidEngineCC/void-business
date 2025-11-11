@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: transparent !important;
+            color: white;
+            min-height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        body.active {
+            display: flex;
+        }
+
+        .container {
+            background: #780b0b; /* MAIN COLOR */
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 30px rgba(120, 11, 11, 0.9);
+            animation: slideIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .business-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffd700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .business-job {
+            font-size: 1em;
+            opacity: 0.9;
+            color: #ffcccb;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .info-label {
+            font-size: 0.85em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            color: #ffcccb;
+        }
+
+        .info-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #ffd700;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+            padding-bottom: 5px;
+        }
+
+        .payout-info {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .payout-range {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0;
+            color: #ffd700;
+        }
+
+        .hourly-estimate {
+            text-align: center;
+            font-size: 0.85em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            color: #ffcccb;
+        }
+
+        .supplies-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.85em;
+            line-height: 1.6;
+            white-space: pre-line;
+            color: #ffcccb;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #00917a, #7ba82d);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .requirements {
+            font-size: 0.75em;
+            opacity: 0.8;
+            text-align: center;
+            margin-top: 8px;
+            color: #ffcccb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="business-name" id="businessName">Business Name</div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-label">Purchase Price</div>
+                <div class="info-value" id="purchasePrice">$0</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">Sell Back Price</div>
+                <div class="info-value" id="sellBackPrice">$0</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💰 Payout Information</div>
+            <div class="payout-info">
+                <div class="payout-range" id="payoutRange">$0 - $0</div>
+                <div class="hourly-estimate" id="hourlyEstimate">Estimated hourly: $0 - $0</div>
+                <div class="requirements">
+                    Payout every <span id="cooldown">30</span> minutes • Min. <span id="minSupplies">10%</span> supplies required
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📦 Required Supplies</div>
+            <div class="supplies-list" id="suppliesList">
+                Loading supplies information...
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-secondary" onclick="closeInfo()">Close</button>
+            <button class="btn btn-primary" onclick="buyBusiness()">Purchase Business</button>
+        </div>
+    </div>
+
+    <script>
+        let currentBusinessIndex = null;
+
+        window.addEventListener('message', function(event) {
+            if (event.data.action === 'openBusinessInfo') {
+                const business = event.data.business;
+                currentBusinessIndex = event.data.businessIndex;
+                
+                document.getElementById('businessName').textContent = business.name;
+                document.getElementById('purchasePrice').textContent = '$' + business.price.toLocaleString();
+                document.getElementById('sellBackPrice').textContent = '$' + business.sellBack.toLocaleString();
+                document.getElementById('payoutRange').textContent = '$' + business.payoutMin.toLocaleString() + ' - $' + business.payoutMax.toLocaleString();
+                document.getElementById('hourlyEstimate').textContent = 'Estimated hourly: $' + business.hourlyMin.toLocaleString() + ' - $' + business.hourlyMax.toLocaleString();
+                document.getElementById('cooldown').textContent = business.cooldown;
+                document.getElementById('minSupplies').textContent = business.minSupplies + '%';
+                document.getElementById('suppliesList').textContent = business.supplies;
+                
+                // Show the NUI
+                document.body.classList.add('active');
+            } else if (event.data.action === 'closeBusinessInfo') {
+                // Hide the NUI
+                document.body.classList.remove('active');
+            }
+        });
+
+        function closeInfo() {
+            fetch(`https://${GetParentResourceName()}/closeBusinessInfo`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify({})
+            });
+            document.body.classList.remove('active');
+        }
+
+        function buyBusiness() {
+            if (currentBusinessIndex !== null) {
+                fetch(`https://${GetParentResourceName()}/buyBusiness`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                    },
+                    body: JSON.stringify({
+                        businessIndex: currentBusinessIndex
+                    })
+                });
+            }
+            closeInfo();
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeInfo();
+            }
+        });
+    </script>
+</body>
+</html>
